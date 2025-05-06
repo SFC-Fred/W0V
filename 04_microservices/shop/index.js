@@ -9,5 +9,5 @@ app.use(express.json());
 app.use("/shop", shopRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example app listening on ports ${port}`);
 });
