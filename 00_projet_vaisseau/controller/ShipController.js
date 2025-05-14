@@ -5,7 +5,7 @@ const ShipController = {
     // TODO
   },
   getById: (req, res) => {
-    // TODO
+    // TODO : should respond with an object like
   },
   create: (req, res) => {
     // TODO
