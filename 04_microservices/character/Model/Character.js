@@ -1,16 +1,18 @@
+const templateCharacter = {
+  id: null,
+  name: "",
+  charClass: "",
+  pv: 0,
+  strength: 0,
+  dexterity: 0,
+  intelligence: 0,
+  inventory: [],
+  equipedItems: [],
+  purse: 0,
+};
+const characterKeys = Object.keys(templateCharacter);
+
 class Character {
-  /*static jsonifiedCharacter = {
-    id,
-    charName,
-    charClass,
-    pv,
-    strength,
-    dexterity,
-    intelligence,
-    inventory,
-    equipedItems,
-  };
-*/
   id;
   name;
   charClass;
@@ -20,6 +22,7 @@ class Character {
   intelligence;
   inventory;
   equipedItems;
+  purse;
 
   constructor(jsonifiedCharacter) {
     this.id = jsonifiedCharacter.id || null;
@@ -31,6 +34,39 @@ class Character {
     this.intelligence = jsonifiedCharacter.intelligence;
     this.inventory = jsonifiedCharacter.inventory;
     this.equipedItems = jsonifiedCharacter.equipedItems;
+    this.purse = jsonifiedCharacter.purse;
+  }
+
+  validate(requestObject) {
+    let objKeys = Object.keys(requestObject);
+
+    for (let index = 0; index < characterKeys.length; index++) {
+      const key = array[index];
+      if (!objKeys.includes(key)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  buyItem(items) {
+    // choose an item in the list and buys it
+    // X Valider qu'on a assez d'or
+    // X observedItem.cost
+
+    let item = items[0]; // Math.random()
+
+    if (this.isRichEnough(item.cost)) {
+      this.inventory.push(item);
+      this.purse -= item.cost;
+      return item;
+    }
+    return null;
+  }
+
+  isRichEnough(itemCost) {
+    return this.purse > itemCost;
   }
 }
 
