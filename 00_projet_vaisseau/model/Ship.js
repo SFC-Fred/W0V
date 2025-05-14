@@ -22,10 +22,10 @@ class Ship {
     this.baseHealth = shipObj.baseHealth || null;
     this.health = shipObj.health || null;
     this.componnentSlots = shipObj.componnentSlots || {
-      thruster: null,
-      hull: null,
-      shield: null,
-      engine: null,
+      thruster: null, // class: Componnent
+      hull: null, // class: Componnent
+      shield: null, // class: Componnent
+      engine: null, // class: Componnent
     };
   }
 
