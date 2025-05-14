@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-// schema
-
 const ShipSchema = new mongoose.Schema({
   _id: mongoose.SchemaTypes.ObjectId,
   name: String,
@@ -19,6 +17,6 @@ const ShipSchema = new mongoose.Schema({
   },
 });
 
-const CharacterModel = mongoose.model("Ship", ShipSchema);
+const ShipModel = mongoose.model("Ship", ShipSchema);
 
-export default CharacterModel;
+export default ShipModel;

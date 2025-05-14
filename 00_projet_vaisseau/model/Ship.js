@@ -1,92 +1,117 @@
-import ShipModel from "./CharacterModel.js";
-
 class Ship {
   id;
   name;
   className;
-  pv;
-  strength;
-  dexterity;
-  intelligence;
-  inventory;
-  equipedItems;
+  type;
+  baseSpeed;
+  baseHealth;
+  health;
+  componnentSlots = {
+    thruster: null,
+    hull: null,
+    shield: null,
+    engine: null,
+  };
 
-  constructor(jsonifiedCharacter) {
-    // Simple convertion
-    this._id = jsonifiedCharacter.id || jsonifiedCharacter._id || null;
-    this.name = jsonifiedCharacter.name;
-    this.className = jsonifiedCharacter.className || "pégu";
-    this.pv = jsonifiedCharacter.pv || 10;
-    this.strength = jsonifiedCharacter.strength || 10;
-    this.dexterity = jsonifiedCharacter.dexterity || 10;
-    this.intelligence = jsonifiedCharacter.intelligence || 10;
-
-    // complicatedConversion
-    this.inventory = jsonifiedCharacter.inventory || [];
-    this.equipedItems = jsonifiedCharacter.equipedItems || {}; // MModel: Sting, app_model: JSON object
-  }
-  static fetch(id, callback) {
-    return CharacterModel.findById(id); // je m'attends que ca retourne : un character || null || une erreur
-  }
-
-  getId() {
-    return this._id;
+  constructor(shipObj) {
+    this.id = shipObj.id || shipObj._id || null;
+    this.name = shipObj.name || null;
+    this.className = shipObj.className || null;
+    this.type = shipObj.type || null;
+    this.baseSpeed = shipObj.baseSpeed || null;
+    this.baseHealth = shipObj.baseHealth || null;
+    this.health = shipObj.health || null;
+    this.componnentSlots = shipObj.componnentSlots || {
+      thruster: null,
+      hull: null,
+      shield: null,
+      engine: null,
+    };
   }
 
-  equipItem(item, slot) {
-    if (!item.isEquipable()) {
-      throw new Error("cant equip the item");
+  installComponnent(componnent, slot) {}
+
+  move() {
+    if (
+      !this.componnentSlots?.engine?.isWorking() ||
+      !this.componnentSlots?.thruster?.isWorking()
+    ) {
+      // TODO : the ship cant move if it doesnt have a working engine
     }
-    if (item.slotType != slot) {
-      throw new Error("cant equip the item in this slot");
+  }
+
+  /**
+   * @param {*} target could be a ship or an asteroid or something else that has a health value
+   */
+  attack(target) {
+    if (
+      !this.componnentSlots?.weapon?.isWorking() ||
+      !this.componnentSlots?.weapon?.hasAmmo()
+    ) {
+      // TODO : the ship cant attack if it doesnt have a working weapon or ammo
     }
-
-    // TODO : do something
   }
 
-  save(responseHandler) {
-    let parsedCharacter = { ...this, _id: this.id, id: undefined };
-
-    CharacterModel.create(parsedCharacter)
-      .then((character) => {
-        let resChar = new Character(character);
-        responseHandler(200, resChar, null);
-        console.log("J'ai sauvegarder");
-      })
-      .catch((err) => {
-        responseHandler(500, null, err);
-      });
+  move() {
+    if (
+      !this.componnentSlots?.engine?.isWorking() ||
+      !this.componnentSlots?.thruster?.isWorking()
+    ) {
+      // TODO : the ship cant move if it doesnt have a working engine
+    }
   }
 
-  remove(callback) {
-    CharacterModel.deleteOne({ _id: this.id })
-      .then((deletedCharacter) => {
-        let resChar = new Character(deletedCharacter);
-        callback(200, resChar, null);
-      })
-      .catch((err) => {
-        callback(500, null, err);
-      });
+  /**
+   * @param {*} source could be a weapon or an asteroid or something else that has a damage value
+   */
+  receiveDamage(source) {
+    if (
+      !this.componnentSlots?.weapon?.isWorking() ||
+      !this.componnentSlots?.weapon?.hasAmmo()
+    ) {
+      // TODO : the ship cant attack if it doesnt have a working weapon or ammo
+    }
   }
+
+  save(callback) {}
+
+  remove(callback) {}
 
   toJSON() {
     return {
       id: this.id,
       name: this.name,
       className: this.className,
-      pv: this.pv,
-      strength: this.strength,
-      dexterity: this.dexterity,
-      intelligence: this.intelligence,
-      inventory: undefined,
-      equipedItems: undefined,
+      type: this.type,
+      baseSpeed: this.baseSpeed,
+      baseHealth: this.baseHealth,
+      health: this.health,
+      componnentSlots: {
+        thruster: this.componnentSlots.thruster,
+        hull: this.componnentSlots.hull,
+        shield: this.componnentSlots.shield,
+        engine: this.componnentSlots.engine,
+      },
     };
   }
 
-  getInventory() {}
+  toString() {
+    return JSON.stringify({
+      id: this.id,
+      name: this.name,
+      className: this.className,
+      type: this.type,
+      baseSpeed: this.baseSpeed,
+      baseHealth: this.baseHealth,
+      health: this.health,
+      componnentSlots: {
+        thruster: this.componnentSlots.thruster,
+        hull: this.componnentSlots.hull,
+        shield: this.componnentSlots.shield,
+        engine: this.componnentSlots.engine,
+      },
+    });
+  }
 }
 
-export default Character;
-// Class
-
-// ?
+export default Ship;
