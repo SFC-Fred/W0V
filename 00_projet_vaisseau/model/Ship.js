@@ -65,12 +65,7 @@ class Ship {
    * @param {*} source could be a weapon or an asteroid or something else that has a damage value
    */
   receiveDamage(source) {
-    if (
-      !this.componnentSlots?.weapon?.isWorking() ||
-      !this.componnentSlots?.weapon?.hasAmmo()
-    ) {
-      // TODO : the ship cant attack if it doesnt have a working weapon or ammo
-    }
+    // TODO : you have to decide how the damage calculation works
   }
 
   save(callback) {}
