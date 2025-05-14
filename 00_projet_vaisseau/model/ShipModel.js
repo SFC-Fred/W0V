@@ -3,17 +3,18 @@ import mongoose from "mongoose";
 const ShipSchema = new mongoose.Schema({
   _id: mongoose.SchemaTypes.ObjectId,
   name: String,
-  className: String,
   type: String,
   baseSpeed: Number,
   baseHealth: Number,
   health: Number,
-  componnentSlots: {
-    thruster: { type: mongoose.SchemaTypes.ObjectId, ref: "Componnent" },
-    hull: { type: mongoose.SchemaTypes.ObjectId, ref: "Componnent" },
-    shield: { type: mongoose.SchemaTypes.ObjectId, ref: "Componnent" },
-    engine: { type: mongoose.SchemaTypes.ObjectId, ref: "Componnent" },
-    // other: { type: mongoose.SchemaTypes.ObjectId, ref: "Componnent" },
+  componentSlots: {
+    thruster: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
+    hull: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
+    shield: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
+    engine: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
+    // cuisine: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
+    // weapon: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
+    // battery: { type: mongoose.SchemaTypes.ObjectId, ref: "component" },
   },
 });
 

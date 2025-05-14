@@ -1,12 +1,11 @@
 class Ship {
   id;
   name;
-  className;
-  type;
+  type; // type: String = "fighter"
   baseSpeed;
   baseHealth;
   health;
-  componnentSlots = {
+  componentSlots = {
     thruster: null,
     hull: null,
     shield: null,
@@ -16,25 +15,24 @@ class Ship {
   constructor(shipObj) {
     this.id = shipObj.id || shipObj._id || null;
     this.name = shipObj.name || null;
-    this.className = shipObj.className || null;
     this.type = shipObj.type || null;
     this.baseSpeed = shipObj.baseSpeed || null;
     this.baseHealth = shipObj.baseHealth || null;
     this.health = shipObj.health || null;
-    this.componnentSlots = shipObj.componnentSlots || {
-      thruster: null, // class: Componnent
-      hull: null, // class: Componnent
-      shield: null, // class: Componnent
-      engine: null, // class: Componnent
+    this.componentSlots = shipObj.componentSlots || {
+      thruster: null, // class: component
+      hull: null, // class: component
+      shield: null, // class: component
+      engine: null, // class: component
     };
   }
 
-  installComponnent(componnent, slot) {}
+  installcomponent(component, slot) {}
 
   move() {
     if (
-      !this.componnentSlots?.engine?.isWorking() ||
-      !this.componnentSlots?.thruster?.isWorking()
+      !this.componentSlots?.engine?.isWorking() ||
+      !this.componentSlots?.thruster?.isWorking()
     ) {
       // TODO : the ship cant move if it doesnt have a working engine
     }
@@ -45,8 +43,8 @@ class Ship {
    */
   attack(target) {
     if (
-      !this.componnentSlots?.weapon?.isWorking() ||
-      !this.componnentSlots?.weapon?.hasAmmo()
+      !this.componentSlots?.weapon?.isWorking() ||
+      !this.componentSlots?.weapon?.hasAmmo()
     ) {
       // TODO : the ship cant attack if it doesnt have a working weapon or ammo
     }
@@ -54,8 +52,8 @@ class Ship {
 
   move() {
     if (
-      !this.componnentSlots?.engine?.isWorking() ||
-      !this.componnentSlots?.thruster?.isWorking()
+      !this.componentSlots?.engine?.isWorking() ||
+      !this.componentSlots?.thruster?.isWorking()
     ) {
       // TODO : the ship cant move if it doesnt have a working engine
     }
@@ -81,11 +79,11 @@ class Ship {
       baseSpeed: this.baseSpeed,
       baseHealth: this.baseHealth,
       health: this.health,
-      componnentSlots: {
-        thruster: this.componnentSlots.thruster,
-        hull: this.componnentSlots.hull,
-        shield: this.componnentSlots.shield,
-        engine: this.componnentSlots.engine,
+      componentSlots: {
+        thruster: this.componentSlots.thruster,
+        hull: this.componentSlots.hull,
+        shield: this.componentSlots.shield,
+        engine: this.componentSlots.engine,
       },
     };
   }
@@ -99,11 +97,11 @@ class Ship {
       baseSpeed: this.baseSpeed,
       baseHealth: this.baseHealth,
       health: this.health,
-      componnentSlots: {
-        thruster: this.componnentSlots.thruster,
-        hull: this.componnentSlots.hull,
-        shield: this.componnentSlots.shield,
-        engine: this.componnentSlots.engine,
+      componentSlots: {
+        thruster: this.componentSlots.thruster,
+        hull: this.componentSlots.hull,
+        shield: this.componentSlots.shield,
+        engine: this.componentSlots.engine,
       },
     });
   }
